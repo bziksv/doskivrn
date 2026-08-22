@@ -4,8 +4,9 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 SITE_ROOT="$(pwd)"
-SSH_HOST="${DOSKIVRN_SSH_HOST:-u526_doskivrn@bziksv.beget.tech}"
-PROD_PATH="${DOSKIVRN_PROD_PATH:-doskivrn.ru/public_html}"
+SSH_HOST="${DOSKIVRN_SSH_HOST:-doskivrn_primeseo@kirk}"
+# На Prime/kirk домашняя директория = public_html (не ~/doskivrn.ru/public_html).
+PROD_PATH="${DOSKIVRN_PROD_PATH:-.}"
 REMOTE=origin
 BRANCH=main
 REPO_URL="https://github.com/bziksv/doskivrn.git"

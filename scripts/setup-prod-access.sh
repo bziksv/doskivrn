@@ -3,7 +3,7 @@
 set -euo pipefail
 
 PUBKEY_FILE="${HOME}/.ssh/id_ed25519.pub"
-HOST="u526_doskivrn@bziksv.beget.tech"
+HOST="doskivrn_primeseo@kirk"
 
 if [[ ! -f "$PUBKEY_FILE" ]]; then
   echo "Создайте ключ: ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -N \"\" -C cursor-deploy-doskivrn"
