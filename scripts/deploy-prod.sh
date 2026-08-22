@@ -57,6 +57,9 @@ if [[ -f /tmp/doskivrn_htaccess.bak ]]; then
   cp -a /tmp/doskivrn_htaccess.bak .htaccess
   echo "restored .htaccess"
 fi
+if [[ -f scripts/ensure-htaccess-rules.sh ]]; then
+  bash scripts/ensure-htaccess-rules.sh .htaccess || echo "ensure-htaccess-rules: failed"
+fi
 
 rm -rf templates_c/* css/compressed/* 2>/dev/null || true
 if [[ -f scripts/install-legal-pages.php ]]; then
@@ -68,5 +71,5 @@ REMOTE
 
 echo "==> Verify"
 curl -sS -o /dev/null -w 'home %{http_code}\n' --max-time 25 https://www.doskivrn.ru/
-curl -sS -o /dev/null -w 'articles %{http_code}\n' --max-time 25 https://www.doskivrn.ru/pages/articles/
+curl -sS -o /dev/null -w 'search %{http_code}\n' --max-time 25 'https://www.doskivrn.ru/search/?search=1&results=10&type=and&query=мебельный+щит'
 echo "==> Done"
