@@ -1,0 +1,75 @@
+
+<RequireAll>
+    Require all granted
+    Require not ip 49.13.193.0/24
+    Require not ip 5.139.230.0/24
+    Require not ip 5.139.253.0/24
+    Require not ip 31.181.248.0/24
+    Require not ip 37.18.38.0/24
+    Require not ip 37.77.111.0/24
+    Require not ip 45.140.18.0/24
+    Require not ip 62.183.46.0/24
+    Require not ip 77.110.108.0/24
+    Require not ip 83.239.97.0/24
+    Require not ip 85.172.109.0/24
+    Require not ip 85.174.205.0/24
+    Require not ip 85.175.197.0/24
+    Require not ip 85.175.217.0/24
+    Require not ip 91.233.43.0/24
+    Require not ip 95.153.163.0/24
+    Require not ip 95.153.177.0/24
+    Require not ip 95.153.178.0/24
+    Require not ip 95.153.180.0/24
+    Require not ip 95.25.184.0/24
+    Require not ip 178.176.211.0/24
+    Require not ip 185.10.173.0/24
+    Require not ip 188.162.140.0/24
+    Require not ip 188.162.143.0/24
+    Require not ip 188.170.169.0/24
+    Require not ip 217.78.231.0/24
+</RequireAll>
+
+
+RewriteEngine on
+RewriteRule ^.htaccess$ - [F]
+RewriteCond %{HTTP_USER_AGENT} ^EmailSiphon [OR]
+RewriteCond %{HTTP_USER_AGENT} ^ExtractorPro
+RewriteRule - - [L]
+RewriteRule ^admin/?$ admin/index.php [L]
+RewriteRule ^search/?$ search/index.php [QSA,L]
+
+RewriteCond %{HTTP_HOST} ^doskivrn\.ru$ [NC]
+RewriteCond %{REQUEST_URI} !^/robots\.txt$
+RewriteRule ^(.*)$ http://www.doskivrn.ru/$1 [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/([a-zA-Z0-9_\s\-]{1,100})$
+RewriteRule ^(.*)$ http://%{HTTP_HOST}/$1/ [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/([a-zA-Z0-9_\s\-]{1,100})/([a-zA-Z0-9_\s\-]{1,100})$
+RewriteRule ^(.*)$ http://%{HTTP_HOST}/$1/$2 [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/([a-zA-Z0-9_\s\-]{1,100})/([a-zA-Z0-9_\s\-]{1,100})/([a-zA-Z0-9_\s\-]{1,100})$
+RewriteRule ^(.*)$ http://%{HTTP_HOST}/$1/$2/$3 [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/([a-zA-Z0-9_\s\-]{1,100})/([a-zA-Z0-9_\s\-]{1,100})/([a-zA-Z0-9_\s\-]{1,100})/([a-zA-Z0-9_\s\-]{1,100})$
+RewriteRule ^(.*)$ http://%{HTTP_HOST}/$1/$2/$3/$4 [R=301,L]
+
+RewriteRule ^/?$ index.php?module=pages&page=index [QSA]
+RewriteRule ^([a-zA-Z0-9_\s\-]{1,100})/?$ index.php?module=$1 [QSA]
+RewriteRule ^([a-zA-Z0-9_\s\-]{1,100})/([a-zA-Z0-9_\s\-]{1,100})/?$ index.php?module=$1&page=$2 [QSA]
+RewriteRule ^([a-zA-Z0-9_\s\-]{1,100})/([a-zA-Z0-9_\s\-]{1,100})/([a-zA-Z0-9_\s\-]{1,100})/?$ index.php?module=$1&page=$2&action=$3 [QSA]
+RewriteRule ^([a-zA-Z0-9_\s\-]{1,100})/([a-zA-Z0-9_\s\-]{1,100})/([a-zA-Z0-9_\s\-]{1,100})/([a-zA-Z0-9_\s\-]{1,100})/?$ index.php?module=$1&page=$2&action=$3&subaction=$4 [QSA]
+ErrorDocument 404 /404.html
+ErrorDocument 403 /403.html
+ErrorDocument 401 /401.html
+ErrorDocument 500 /500.html
+RewriteRule ^404\.html?$ index.php?module=errors&page=404 [L]
+RewriteRule ^403\.html?$ index.php?module=errors&page=403 [L]
+RewriteRule ^401\.html?$ index.php?module=errors&page=401 [L]
+RewriteRule ^500\.html?$ index.php?module=errors&page=500 [L]
+
+php_flag output_buffering On
+php_flag magic_quotes_gpc off
+php_value upload_max_filesize 25M
+php_value post_max_size 30M
+php_value session.use_trans_sid off

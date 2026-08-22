@@ -1,0 +1,18 @@
+* html body{width: expression(document.documentElement.clientWidth < 1000 ? "1000px" : "auto");}
+* html #wrapper{width: expression(document.documentElement.clientWidth > 1600 ? "1600px" : "auto");}
+* html .logo a {	background:url(../images/none.gif);
+	cursor:pointer;	filter: progid:dximagetransform.microsoft.alphaimageloader(src='images/logo.png', sizingmethod='crop');}
+* html .bg-tree{
+	background:url(../images/none.gif);
+	filter: progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-tree.png', sizingmethod='crop');
+}
+* html .menu .l{
+	background:url(../images/none.gif);
+	filter: progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-menu-l.png', sizingmethod='crop');
+}
+* html .menu .r{
+	background:url(../images/none.gif);
+	filter: progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-menu-r.png', sizingmethod='crop');
+}
+.menu ul li,
+#footer .address ul li{z-index: expression( runtimeStyle.zIndex = 1, this == parentNode.firstChild ? (className += ' first-child') : 0 );}

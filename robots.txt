@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /admin
+Disallow: /*?
+Disallow: /?s=
+Host: https://www.doskivrn.ru/
+Sitemap: https://www.doskivrn.ru/sitemap.xml

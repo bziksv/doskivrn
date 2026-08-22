@@ -1,0 +1,30 @@
+.good-cat {
+    /*outline: 1px solid darkred;*/
+    display: block;
+    float: left;
+    width: 280px;
+    overflow: hidden;
+    text-decoration: none;
+}
+
+.good-cat .good-cat__img {
+    width: 180px;
+    /*outline: 1px solid green;*/
+    display: block;
+    margin: 0 auto;
+    height: 180px;
+    object-fit: cover;
+}
+
+.good-cat .good-cat__p {
+    text-align: center;
+    margin-top: 10px;
+    display: block;
+    color: #999;
+    font-size: 14px;
+}
+
+.good-cat:hover .good-cat__p {
+    color:#41D00F;
+    text-decoration: underline;
+}

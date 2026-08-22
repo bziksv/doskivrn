@@ -1,0 +1,42 @@
+# Секреты и серверный конфиг
+configure.php
+.env
+.env.*
+
+# Локальная разработка
+.local/run/
+.local/db.env
+.local/*.log
+
+# Кэш Smarty (на prod пересобирается из templates/)
+templates_c/
+
+# Сгенерированный CSS
+css/compressed/
+
+# Загрузки и медиа
+files/
+upload/
+img/user/
+_thumbs/
+
+# Дампы и большие артефакты
+*.sql
+*.sql.gz
+adminer-*.php
+# Деплой-зеркало (не в git)
+/!Server/
+
+# Кэш / логи
+.cache/
+*.log
+webstat/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+
+# Верификация поисковиков (на prod отдельно)
+google*.html
+yandex_*

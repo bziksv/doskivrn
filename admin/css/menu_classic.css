@@ -1,0 +1,26 @@
+/*				Панель меню классического вида				*/
+div.panelitemtitle {cursor:default;}
+#menu_main {padding: 5px 5px 10px 0px;}
+/*				Меню классического вида				*/
+ul.menu_classic {list-style:none;padding:3px 0 0 0px;margin:0px;}
+li.menu_item_non_childs {} /*Нет подкатегорий вообще*/
+li.menu_item_yes_childs {} /*Закрытая папка*/
+li.menu_item_yes_childs_open {} /*Открытая папка*/
+ul.menu_classic div.folder {width:16px;height:13px;float:left;padding: 0 5px 0 0;}
+a.menu_item_non_childs {display:block;background: url(/admin/img/menu_classic/item_non_childs.jpg) no-repeat 0px 0;} /*Нет подкатегорий вообще*/
+a.menu_item_yes_childs {display:block;background: url(/admin/img/menu_classic/item_yes_childs.jpg) no-repeat 0px 0;} /*Закрытая папка*/
+a.menu_item_yes_childs_open {display:block;background: url(/admin/img/menu_classic/item_yes_childs_open.jpg) no-repeat 0px 0px;} /*Открытая папка*/
+
+li.menu_item_non_childs,
+li.menu_item_yes_childs,
+li.menu_item_yes_childs_open {font-size:11px;font-family:Arial;padding:3px 0 3px 20px;margin:0px;}
+li.menu_item_non_childs a,
+li.menu_item_yes_childs a,
+li.menu_item_yes_childs_open a{text-decoration:none;color:#333333;}
+a.menutext:hover{text-decoration:none;color:#fff;background:#333333;}
+li.menu_item_non_childs span.numeric,
+li.menu_item_yes_childs span.numeric,
+li.menu_item_yes_childs_open span.numeric{padding: 0 3px 0 5px;}
+li.menu_item_line {}/*Линия*/
+ul.menu_classic ul.menu_classic {display:none;} /*Подкатегории*/
+ul.menu_classic div.load_m {font-size:11px;font-family:Arial;padding:3px 0 3px 27px;color:#838485;}

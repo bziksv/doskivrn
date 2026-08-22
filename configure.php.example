@@ -1,0 +1,14 @@
+<?php
+$global_path = $_SERVER ['DOCUMENT_ROOT'] . "/";
+$path_modules = $global_path . 'modules/';
+$path_img = $global_path . 'img/';
+$path_banners = $global_path . 'upload/banners/';
+$path_banners_view = '/upload/banners/';
+$path_conf = $global_path . 'classes/';
+$path_templates = $global_path . 'templates/';
+
+$dbhost = "localhost";
+$dbuser = "doskivrn_sajt";
+$dbpass = "CHANGE_ME";
+$dbname = "doskivrn_sajt";
+?>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+	<menu_item num="1" link="mod=admin&amp;act=listadmins" name="Администраторы" help="Администраторы Вашего сайта">
+		<menu_item num="1" link="mod=admin&amp;act=addadmin" name="Новый" help="Добавить нового администратора" />
+		<menu_item num="2" link="mod=admingroup&amp;act=listadmins" name="Группы" help="Группы администраторов">
+			<menu_item num="1" link="mod=admingroup&amp;act=addadmin" name="Новая" help="Новая группа" />
+		</menu_item>
+	</menu_item>
+	
+	<menu_item num="2" link="mod=news&amp;act=listpages" name="Новости" help="Список новостей">
+		<menu_item num="1" link="mod=news&amp;act=addnew" name="Новая" help="Добавить новую новость" />
+		<menu_item num="2" link="mod=news&amp;act=cats" name="Разделы" help="Список разделов для новостей">
+			<menu_item num="1" link="mod=news&amp;act=addnewcat" name="Новый" help="Добавить новый раздел" />
+		</menu_item>
+	</menu_item>
+	
+	<menu_item num="4" link="mod=pages&amp;act=listpages" name="Страницы" help="Динамические страницы сайта">
+		<menu_item num="1" link="mod=pages&amp;act=addpage" name="Добавить" help="Добавить новую динамическую страницу" />
+	</menu_item>
+	
+	<menu_item num="5" link="mod=banners&amp;act=listbanners" name="Баннеры" help="Баннеры сайта" />
+	
+	<menu_item num="5" link="mod=menu&amp;act=listpages" name="Меню сайта" help="Список меню">
+		<menu_item num="1" link="mod=menu&amp;act=addnew" name="Добавить" help="Добавить новую пункт меню" />
+	</menu_item>
+	
+	<menu_item num="8" link="" name="Настройки" help="Настройки системы управления">
+			<menu_item num="1" link="mod=template&amp;act=listhtml" name="Шаблоны" help="Управление шаблонами системы" />
+			<menu_item num="2" link="mod=ctrloptions&amp;act=listoptions" name="Опции" help="Управление данными таблиц" >
+				<menu_item num="1" link="mod=ctrloptions&amp;act=addoptions" name="Добавить" help="Добавить новый тип опции" />
+				<menu_item num="2" link="mod=ctrloptions&amp;act=optionstable" name="Таблицы" help="Управление опциями таблиц" />
+			</menu_item>
+			<menu_item num="3" link="" name="База данных" help="Управление базой данных системы">
+				<menu_item num="1" link="mod=db&amp;act=optimize" name="Оптимизация" help="Оптимизация базы данных" />
+			</menu_item>
+			<menu_item num="4" link="mod=setting&amp;act=listsetting" name="Настройки" help="Управление настройками системы" />
+		</menu_item>
+	
+</menu>

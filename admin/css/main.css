@@ -1,0 +1,177 @@
+
+/*Общие для всех*/
+body,td,th,form {padding:0;margin:0;}
+body,td,th {font-size:12px;font-family:Arial;color:#000;}
+body{background: url(/admin/img/bg.jpg) left top;}
+img{border:0;}
+a{color:#0377c5;}
+a:hover{color:#0377c5;}
+/*Верх админки*/
+div.mt {width:expression(document.body.clientWidth > 950 ? "100%" :"950px");min-width: 950px;height:100%;}
+td.header {background: url(/admin/img/bg_head.jpg) repeat-x left top;height:76px;vertical-align:top;}
+td.lineheader {background: #DADADA;border-bottom:1px solid #BCBCBC;height:8px;font-size:0px;clear:both;}
+div.logo{float:left;padding: 10px 0 0 30px;}
+/*Низ админки*/
+td.footer {background: #DADADA;height:46px;vertical-align:top; border-top:1px solid #A8A8A8;vertical-align:bottom;}
+td.footer div.f_{height:46px;width:410px;}
+td.footer div.logob{float:left;text-align:left;padding: 10px 10px 0 0;}
+td.footer div.line{float:left;font-size:0px;text-align:left;}
+td.footer div.text{float:left;text-align:left;padding: 10px 0 0 10px;font-size:10px;font-family:Tahoma;color:#9A9A9A;}
+td.footer div.text a{color:#9A9A9A;text-decoration:underline;}
+td.footer div.text a:hover{color:#9A9A9A;text-decoration:underline;}
+
+td.container {vertical-align:top;}
+td.messageboxex {padding:10px;height:20px;}
+#messageBoxin {}
+div.messagebox {border:1px solid #017DD5;padding: 8px 20px 8px 40px;background:#CBE7FD url(/admin/img/messagealert.jpg) no-repeat 10px 50%;color:#005490;font-weight:bold;font-size:12px;font-family:Arial;}
+div.boxtl {clear:right;}
+div.timebox {float:right;color:#c8e8ff;padding: 10px 26px 0 0;font-size:11px;}
+div.licensebox {float:right;color:#c8e8ff;padding: 10px 30px 0 0;font-size:11px;}
+div.langbox {float:right;height:22px;padding: 10px 10px 0 0;}
+div.langbox_ {background: url(/admin/img/loginbg.jpg) repeat-x left top;height:18px;color:#c8e8ff;padding: 4px 5px 0 5px;font-size:11px;border:1px solid #2772b4;}
+div.langbox_ a{color:#1866ac;text-decoration:underline;font-weight:bold;}
+div.langbox_ a:hover{color:#1866ac;text-decoration:underline;font-weight:bold;}
+div.projectbox {float:right;height:22px;padding: 10px 10px 0 0;}
+div.projectbox_ {background: url(/admin/img/loginbg.jpg) repeat-x left top;height:20px;color:#c8e8ff;padding: 2px 5px 0 5px;font-size:11px;border:1px solid #2772b4;}
+div.projectbox_ a{color:#1866ac;text-decoration:underline;font-weight:bold;}
+div.projectbox_ a:hover{color:#1866ac;text-decoration:underline;font-weight:bold;}
+div.loginbox_ {float:right;height:22px;padding: 10px 10px 0 0;}
+div.loginbox {background: url(/admin/img/loginbg.jpg) repeat-x left top;height:18px;padding: 4px 15px 0 15px;font-size:11px;border:1px solid #2772b4;}
+div.loginbox1 {float:left;color:#c8e8ff;}
+div.loginbox1 span{color:#1866ac;text-decoration:underline;font-weight:bold;}
+div.loginbox2 {float:left;color:#c8e8ff;padding: 0 0 0 10px;}
+div.loginbox2 a{color:#c8e8ff;text-decoration:underline;}
+div.loginbox2 a:hover{color:#c8e8ff;text-decoration:underline;}
+
+
+div.panelitem {width:290px;height:200px;padding:4px;background:#EDEDED;margin:5px;float:left;}
+table.panelitemfull {width:100%;height:100% !important;border-spacing:5px;}/*background:#EDEDED;*/
+td.panelitemfullbg {padding:4px;background:#EDEDED;}
+div.panelbottom {text-align:center;border-top:1px solid #B0B0B0;font-size:0px;height:7px;background: url(/admin/img/panelbottombg.jpg) repeat-x left top;}
+div.panelbottom a{padding-top:1px;display:block;text-align:center;}
+td.panelmain {}
+table.panelitembg {border:1px solid #CCCCCC;background:#fff;}
+div.panelitemtitle {background: url(/admin/img/panelhbg.jpg) repeat-x left top;height:19px;font-size:12px;font-weight:bold;color:#595959;padding: 4px 0 0 40px;cursor:move;}
+div.panelitemtitleclose {cursor:pointer;float:right;padding: 0 4px 0 0;}
+div.panelitemtitlehide {cursor:pointer;float:right;padding: 0 4px 0 0;}
+div.panelitemtitleopen {cursor:pointer;float:right;padding: 0 2px 0 0;}
+
+/*Классический вид меню*/
+table.view_admin_classic {border-collapse:collapse;border-spacing:0;border-padding:0;width:100%;height:100% !important;}
+
+#rectangle{
+	float:left;
+	border:1px dotted #F00;	/* Red border */
+	background-color:#FFF;
+}
+#insertionMarker{	/* Don't change the rules for the insertionMarker */
+	width:6px;
+	position:absolute;
+	display:none;
+}
+#insertionMarker img{	/* Don't change the rules for the insertionMarker */
+	float:left;
+}		
+#dragDropMoveLayer{	/* Dragable layer - Not need if you're using 'rectangle' mode */
+	position:absolute;
+	display:none;
+	border:1px solid #000;
+	filter:alpha(opacity=50);	/* 50% opacity , i.e. transparency */
+	opacity:0.5;	/* 50% opacity , i.e. transparency */
+
+}
+
+/*Меню верхнее, в хидере около логотипа*/
+div.menuheader {float:left;clear:left;padding: 17px 0 0 10px;}
+div.menuheaderitem {float:left;font-size:12px;color:#595959;}
+div.menuheaderitemcheck {float:left;font-size:12px;color:#595959;}
+div.menuheaderitem a{dislay:block;font-size:12px;color:#fff;text-decoration:none;padding: 5px 20px 4px 20px;}
+div.menuheaderitem a:hover{}
+div.menuheaderitemcheck {float:left;font-size:12px;color:#595959;}
+div.menuheaderitemcheck a{dislay:block;padding: 5px 20px 4px 20px;font-size:12px;color:#595959;text-decoration:none;background: url(/admin/img/menutitlebg.jpg) repeat-x left top;}
+
+div.panel_div_1 {clear:left;background:#e7f2fc;color:#707070;font-size:12px;font-family:Arial;padding: 6px;}
+div.panel_div_2 {clear:left;background:#fff;color:#707070;font-size:12px;font-family:Arial;padding: 6px;}
+div.panel_div_2  table,div.panel_div_1 table {border-collapse:collapse;}
+div.panel_div_2  table td,div.panel_div_1 table td{color:#707070;font-size:12px;font-family:Arial;}
+div.panel_div_2  table td img,div.panel_div_1 table td img{padding:0 5px;}
+div.panel_div_nb {clear:left;color:#999999;font-size:12px;font-family:Arial;text-align:center;padding:10px 0 ;}
+div.panel_div_nb a{color:#999999;}
+div.panel_div_nb a:hover{color:#595959;}
+
+
+/*   futu_alert.css   */
+.futu_alert_outer {
+	position: fixed;
+	top: 0; left: 0;
+	width: 100%;
+	_position:absolute;
+	_top: expression(
+		eval(document.documentElement.scrollTop) + "px"
+	);
+	_width: expression(
+		eval(document.body.clientWidth) + "px"
+	);
+	z-index:9999;
+}
+.futu_alert_outer .frame {
+	position:relative;
+	z-index:9999;
+}
+.futu_alerts_holder {
+	position:absolute;
+	left:69%; top:0;
+	width:30%;
+	z-index:9999;
+}
+
+.futu_alerts_holder .futu_alert {
+	position:absolute;
+	top:-1000px;
+	background-color:#FFEBA0;
+	font:1em Tahoma, sans-serif;
+	border:1px solid #FFFFFF;
+	margin-left:60px;
+}
+.futu_alerts_holder .futu_alert .futu_alert_header {
+	font-family:Verdana;
+	text-align:left;
+	font-size:1em;
+	margin:10px 20px 0;
+	color:#fff;
+}
+.futu_alerts_holder .futu_alert .futu_alert_text {
+	font-family:Verdana;
+	text-align:left;
+	font-size:0.8em;
+	margin:10px 20px;
+	color:#fff;
+}
+.futu_alerts_holder .futu_alert .futu_alert_close_button {
+	position:absolute;
+	padding:10px;
+	top:0;
+	right:0;
+	outline:none;
+}
+.futu_alerts_holder .message {
+	color:#FFF;
+	background-color:#6690C9;
+}
+.futu_alerts_holder .error {
+	color:#FFF;
+	background-color:#ed6060;
+}
+.futu_alerts_holder .save {
+	color:#FFF;
+	background-color:#73a168;
+}
+
+#loading_p {position: fixed;z-index:999999;top: 0px;left: 0px;height:100%;width:100%;text-align:center;}
+#loading_p div {padding: 5px 0 0 5px;}
+#loading_p div.loading_p_v {padding: 5px 0 5px 0;float:left;width:150px;font-size:10px;font-size:#000;background:#fff;text-align:center;border:1px solid #cccccc;}
+
+
+
+
+select.region {border:1px solid #cccccc; padding-left:4px;color:#505050;font-size:10px;font-family:Arial;}
