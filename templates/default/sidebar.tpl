@@ -38,7 +38,7 @@
 					<div class="row{if isset($feedback_errors.phone)} row--error{/if}">
 						<label for="i3">Телефон</label>
 						<div class="text-inp">
-							<input id="i3" class="text" type="tel" name="phone" placeholder="+7-___-___-__-__" maxlength="16" autocomplete="tel" required="required" pattern="\+7-[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}" title="Формат: +7-___-___-__-__" value="{if isset($smarty.post.phone)}{$smarty.post.phone}{/if}" />
+							<input id="i3" class="text" type="tel" name="phone" placeholder="+7-___-___-__-__" maxlength="16" autocomplete="tel" required="required" pattern="{literal}+7-[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}{/literal}" title="Формат: +7-___-___-__-__" value="{if isset($smarty.post.phone)}{$smarty.post.phone}{/if}" />
 							{if isset($feedback_errors.phone)}<span class="field-error">{$feedback_errors.phone}</span>{/if}
 						</div>
 					</div>
