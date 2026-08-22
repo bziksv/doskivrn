@@ -59,6 +59,9 @@ if [[ -f /tmp/doskivrn_htaccess.bak ]]; then
 fi
 
 rm -rf templates_c/* css/compressed/* 2>/dev/null || true
+if [[ -f scripts/install-legal-pages.php ]]; then
+  php scripts/install-legal-pages.php || echo "install-legal-pages: skipped or failed"
+fi
 git log -1 --oneline
 echo "cache_cleared"
 REMOTE
