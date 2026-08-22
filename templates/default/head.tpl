@@ -8,13 +8,11 @@
 
 {*<link media="all" rel="stylesheet" type="text/css" href="/compress.php?css,css/all,css/form,css/pp" />*}
 <link media="all" rel="stylesheet" type="text/css" href="/compress.php?css,css/all,css/form,css/pp,css/pages/catalog,bust4" />
-<link media="all" rel="stylesheet" type="text/css" href="/css/cookies.css" />
 <link media="all" rel="stylesheet" type="text/css" href="/css/pages/legal.css" />
 
 
 <script type="text/javascript" src="/compress.php?js,js/jq,js/jq.main,js/jq.pp,js/cms.main,js/cms.flash,bust4"></script>
 <script type="text/javascript" src="/js/feedback-phone.js?v=3"></script>
-<script type="text/javascript" src="/js/cookies.js"></script>
 <!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="css/lt7.css" /><![endif]-->
 <link rel="icon" href="/favicon.ico" type="image/x-icon"/> 
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/> 
