@@ -23,6 +23,7 @@ _thumbs/
 # Дампы и большие артефакты
 *.sql
 *.sql.gz
+!scripts/data/*.sql
 adminer-*.php
 # Деплой-зеркало (не в git)
 /!Server/

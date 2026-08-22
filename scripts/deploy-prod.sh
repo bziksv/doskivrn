@@ -57,15 +57,8 @@ if [[ -f /tmp/doskivrn_htaccess.bak ]]; then
   cp -a /tmp/doskivrn_htaccess.bak .htaccess
   echo "restored .htaccess"
 fi
-if [[ -f scripts/ensure-htaccess-rules.sh ]]; then
-  bash scripts/ensure-htaccess-rules.sh .htaccess || echo "ensure-htaccess-rules: failed"
-fi
 
-rm -rf templates_c/* css/compressed/* 2>/dev/null || true
-if [[ -f scripts/install-legal-pages.php ]]; then
-  php scripts/install-legal-pages.php || echo "install-legal-pages: skipped or failed"
-fi
-git log -1 --oneline
+bash scripts/post-deploy.sh
 echo "cache_cleared"
 REMOTE
 
