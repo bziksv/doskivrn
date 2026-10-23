@@ -87,3 +87,11 @@ screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
 </script>
 <noscript><div><img src="//mc.yandex.ru/watch/29715550" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->{/literal}
+<div id="cookie-consent" class="cookie-consent" role="dialog" aria-live="polite" aria-label="Уведомление о cookies">
+	<div class="cookie-consent__inner">
+		<p class="cookie-consent__text">
+			Этот сайт использует cookie-файлы для настройки рекламы и сбора статистики. Оставаясь на сайте, вы соглашаетесь на обработку ваших персональных данных в соответствии с <a href="/pages/doskivrn_politika_pd/" target="_blank" rel="noopener">политикой обработки персональных данных</a> и <a href="/pages/doskivrn_politika_cookie/" target="_blank" rel="noopener">политикой cookies</a>.
+		</p>
+		<button type="button" class="cookie-consent__btn" id="cookie-consent-accept">Принять</button>
+	</div>
+</div>
