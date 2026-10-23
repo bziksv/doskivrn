@@ -27,6 +27,9 @@ namespace {
             trigger_error('php7-mysql-shim: ext/mysqli is required', E_USER_ERROR);
         }
 
+        // PHP 8.1+: mysqli throws by default — keep old mysql_* false-return behavior
+        mysqli_report(MYSQLI_REPORT_OFF);
+
         define('MYSQL_ASSOC', 1);
         define('MYSQL_NUM', 2);
         define('MYSQL_BOTH', 3);
@@ -87,7 +90,7 @@ namespace {
                     return false;
                 }
                 MySQL::$last_connection = $conn;
-                $conn->hash = $hash; // @phpstan-ignore-line
+                MySQL::setConnHash($conn, $hash);
                 MySQL::$connections[$hash] = array('refcount' => 1, 'conn' => $conn);
 
                 return $conn;
@@ -115,7 +118,7 @@ namespace {
                 }
                 // @codeCoverageIgnoreEnd
 
-                $conn->hash = $hash; // @phpstan-ignore-line
+                MySQL::setConnHash($conn, $hash);
                 MySQL::$connections[$hash] = array('refcount' => 1, 'conn' => $conn);
 
                 return $conn;
@@ -138,7 +141,7 @@ namespace {
             return mysql_connect($hostname, $username, $password, false, $flags);
         }
 
-        function mysql_close(mysqli $link = null)
+        function mysql_close(?mysqli $link = null)
         {
             $isDefault = ($link === null);
 
@@ -150,14 +153,16 @@ namespace {
                 // @codeCoverageIgnoreEnd
             }
 
-            if (isset(MySQL::$connections[$link->hash])) {
-                MySQL::$connections[$link->hash]['refcount'] -= 1;
+            $hash = MySQL::getConnHash($link);
+            if ($hash !== null && isset(MySQL::$connections[$hash])) {
+                MySQL::$connections[$hash]['refcount'] -= 1;
             }
 
             $return = true;
-            if (MySQL::$connections[$link->hash]['refcount'] === 0) {
+            if ($hash !== null && isset(MySQL::$connections[$hash]) && MySQL::$connections[$hash]['refcount'] === 0) {
                 $return = mysqli_close($link);
-                unset(MySQL::$connections[$link->hash]);
+                unset(MySQL::$connections[$hash]);
+                MySQL::clearConnHash($link);
             }
 
             if ($isDefault) {
@@ -167,7 +172,7 @@ namespace {
             return $return;
         }
 
-        function mysql_select_db($databaseName, mysqli $link = null)
+        function mysql_select_db($databaseName, ?mysqli $link = null)
         {
             $link = MySQL::getConnection($link);
 
@@ -177,12 +182,12 @@ namespace {
             ) !== false;
         }
 
-        function mysql_query($query, mysqli $link = null)
+        function mysql_query($query, ?mysqli $link = null)
         {
             return mysqli_query(MySQL::getConnection($link), $query);
         }
 
-        function mysql_unbuffered_query($query, mysqli $link = null)
+        function mysql_unbuffered_query($query, ?mysqli $link = null)
         {
             $link = MySQL::getConnection($link);
             if (mysqli_real_query($link, $query)) {
@@ -192,7 +197,7 @@ namespace {
             return false;
         }
 
-        function mysql_db_query($databaseName, $query, mysqli $link = null)
+        function mysql_db_query($databaseName, $query, ?mysqli $link = null)
         {
             if (mysql_select_db($databaseName, $link)) {
                 return mysql_query($query, $link);
@@ -200,12 +205,12 @@ namespace {
             return false;
         }
 
-        function mysql_list_dbs(mysqli $link = null)
+        function mysql_list_dbs(?mysqli $link = null)
         {
             return mysql_query('SHOW DATABASES', $link);
         }
 
-        function mysql_list_tables($databaseName, mysqli $link = null)
+        function mysql_list_tables($databaseName, ?mysqli $link = null)
         {
             $link = MySQL::getConnection($link);
             $query = sprintf(
@@ -215,7 +220,7 @@ namespace {
             return mysql_query($query, $link);
         }
 
-        function mysql_list_fields($databaseName, $tableName, mysqli $link = null)
+        function mysql_list_fields($databaseName, $tableName, ?mysqli $link = null)
         {
             $link = MySQL::getConnection($link);
 
@@ -238,22 +243,22 @@ namespace {
             // @codeCoverageIgnoreEnd
         }
 
-        function mysql_list_processes(mysqli $link = null)
+        function mysql_list_processes(?mysqli $link = null)
         {
             return mysql_query('SHOW PROCESSLIST', $link);
         }
 
-        function mysql_error(mysqli $link = null)
+        function mysql_error(?mysqli $link = null)
         {
             return mysqli_error(MySQL::getConnection($link));
         }
 
-        function mysql_errno(mysqli $link = null)
+        function mysql_errno(?mysqli $link = null)
         {
             return mysqli_errno(MySQL::getConnection($link));
         }
 
-        function mysql_affected_rows(mysqli $link = null)
+        function mysql_affected_rows(?mysqli $link = null)
         {
             return mysqli_affected_rows(MySQL::getConnection($link));
         }
@@ -627,57 +632,57 @@ namespace {
             return mysql_real_escape_string($unescapedString);
         }
 
-        function mysql_real_escape_string($unescapedString, mysqli $link = null)
+        function mysql_real_escape_string($unescapedString, ?mysqli $link = null)
         {
             return mysqli_real_escape_string(MySQL::getConnection($link), $unescapedString);
         }
 
-        function mysql_stat(mysqli $link = null)
+        function mysql_stat(?mysqli $link = null)
         {
             return mysqli_stat(MySQL::getConnection($link));
         }
 
-        function mysql_thread_id(mysqli $link = null)
+        function mysql_thread_id(?mysqli $link = null)
         {
             return mysqli_thread_id(MySQL::getConnection($link));
         }
 
-        function mysql_client_encoding(mysqli $link = null)
+        function mysql_client_encoding(?mysqli $link = null)
         {
             return mysqli_character_set_name(MySQL::getConnection($link));
         }
 
-        function mysql_ping(mysqli $link = null)
+        function mysql_ping(?mysqli $link = null)
         {
             return mysqli_ping(MySQL::getConnection($link));
         }
 
-        function mysql_get_client_info(mysqli $link = null)
+        function mysql_get_client_info(?mysqli $link = null)
         {
             return mysqli_get_client_info(MySQL::getConnection($link));
         }
 
-        function mysql_get_host_info(mysqli $link = null)
+        function mysql_get_host_info(?mysqli $link = null)
         {
             return mysqli_get_host_info(MySQL::getConnection($link));
         }
 
-        function mysql_get_proto_info(mysqli $link = null)
+        function mysql_get_proto_info(?mysqli $link = null)
         {
             return mysqli_get_proto_info(MySQL::getConnection($link));
         }
 
-        function mysql_get_server_info(mysqli $link = null)
+        function mysql_get_server_info(?mysqli $link = null)
         {
             return mysqli_get_server_info(MySQL::getConnection($link));
         }
 
-        function mysql_info(mysqli $link = null)
+        function mysql_info(?mysqli $link = null)
         {
             return mysqli_info(MySQL::getConnection($link));
         }
 
-        function mysql_set_charset($charset, mysqli $link = null)
+        function mysql_set_charset($charset, ?mysqli $link = null)
         {
             return mysqli_set_charset(MySQL::getConnection($link), $charset);
         }
@@ -789,6 +794,24 @@ namespace Dshafik {
     {
         public static $last_connection;
         public static $connections = array();
+        /** @var array<int,string> mysqli object id => connection hash (no dynamic props on mysqli) */
+        public static $conn_hashes = array();
+
+        public static function setConnHash($conn, $hash)
+        {
+            static::$conn_hashes[spl_object_id($conn)] = $hash;
+        }
+
+        public static function getConnHash($conn)
+        {
+            $id = spl_object_id($conn);
+            return isset(static::$conn_hashes[$id]) ? static::$conn_hashes[$id] : null;
+        }
+
+        public static function clearConnHash($conn)
+        {
+            unset(static::$conn_hashes[spl_object_id($conn)]);
+        }
 
         public static function getConnection($link = null, $func = null)
         {

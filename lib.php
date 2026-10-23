@@ -3,10 +3,17 @@
 setlocale ( LC_ALL, 'ru_RU.UTF-8' );
 //Файл конфигурации
 include "configure.php";
-//Автоподгрузка классов
-function __autoload($class_name) {
-	require_once $GLOBALS ["path_conf"] . "class." . $class_name . '.php';
+// PHP 7+/8: ext/mysql убран — shim через mysqli
+if (!function_exists('mysql_connect')) {
+	$__mysql_shim = $global_path . '.local/mysql.php';
+	if (is_readable($__mysql_shim)) {
+		require_once $__mysql_shim;
+	}
 }
+//Автоподгрузка классов
+spl_autoload_register(function ($class_name) {
+	require_once $GLOBALS ["path_conf"] . "class." . $class_name . '.php';
+});
 define ( "MODULE_SYS", true );
 //Подключение необходимых компонентов
 //include $path_conf . "class.trigger.php";
@@ -29,7 +36,7 @@ if (isset ( $_GET ["sid"] )) {
 session_start ();
 if (! isset ( $_COOKIE ["_sid"] )) {
 	$sid = session_id ();
-	setcookie ( "_sid", $sid, false, '/', false, 0 );
+	setcookie ( "_sid", $sid, 0, '/', '', false, false );
 }
 $sid = session_id ();
 

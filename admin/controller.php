@@ -69,8 +69,10 @@ class controllerAdmin {
 		
 		//Смотрим какой нам нужен модуль и подсоединяем его
 		if (isset ( $_GET ["mod"] ) and preg_match ( "/^[a-zA-Z0-9_]{1,15}$/", $_GET ["mod"] )) {
-			if (file_exists ( 'mod/' . $_GET ["mod"] . '.php' )) {
-				include 'mod/' . $_GET ["mod"] . '.php';
+			// __DIR__: cwd при php -S / router — корень сайта, не admin/
+			$mod_file = __DIR__ . '/mod/' . $_GET ["mod"] . '.php';
+			if (file_exists ( $mod_file )) {
+				include $mod_file;
 			} else {
 				$GLOBALS ["center"] = '<div class="xjaxcontent"><div class="xajax_tablelist"><br /><br />Данный модуль не найден!<br /><br /><a href="javascript:history.back()">&laquo; вернуться назад</a></div></div>';
 				print $GLOBALS ["center"];
@@ -89,8 +91,10 @@ class controllerAdmin {
 		
 		//Смотрим какое действие нам нужно, и активируем его
 		if (isset ( $_GET ["act"] ) and $_GET ["act"] != null and $_GET ["act"] != '') {
-			if (in_array ( $_GET ["act"], get_class_methods ( $module ) )) {
-				eval ( '$GLOBALS["center"] = $module->' . $_GET ["act"] . '();' );
+			$act = $_GET ["act"];
+			$methods = get_class_methods ( $module );
+			if (in_array ( $act, $methods, true ) || in_array ( strtolower ( $act ), array_map ( 'strtolower', $methods ), true )) {
+				$GLOBALS ["center"] = $module->$act ();
 			} else {
 				$GLOBALS ["center"] = '<div class="xjaxcontent"><div class="xajax_tablelist"><br /><br />Ошибка! Данного действия не существует!<br /><br /><a href="javascript:history.back()">&laquo; вернуться назад</a></div></div>';
 				print $GLOBALS ["center"];

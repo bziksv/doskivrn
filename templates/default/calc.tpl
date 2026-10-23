@@ -73,8 +73,8 @@
 				</div>
 			</div>
 			<ul class="buttons">
-				<li><a onclick="yaCounter11319412.reachGoal('CALC1'); return true;" href="#" id="cgo">Рассчитать</a></li>
-				<li><a onclick="yaCounter11319412.reachGoal('ORDER1'); return true;" href="#popup1" class="open-popup" onclick="calculation ();">Заказать</a></li>
+				<li><a onclick="yaCounter11319412.reachGoal('CALC1'); return false;" href="#" id="cgo">Рассчитать</a></li>
+				<li><a href="#popup1" class="open-popup" onclick="yaCounter11319412.reachGoal('ORDER1'); calculation(); return true;">Заказать</a></li>
 			</ul>
 		</fieldset>
 	</form>

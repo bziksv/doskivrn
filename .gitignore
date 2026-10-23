@@ -11,8 +11,9 @@ configure.php
 # Кэш Smarty (на prod пересобирается из templates/)
 templates_c/
 
-# Сгенерированный CSS
+# Сгенерированный CSS/JS (compress.php)
 css/compressed/
+js/compressed/
 
 # Загрузки и медиа
 files/

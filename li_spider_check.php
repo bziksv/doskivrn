@@ -38,7 +38,7 @@
     	}
 	    function URLEncodeArray($QueryVars) {
 	        unset($QueryBits);
-	        while (list($var, $value) = each($QueryVars)) {
+	        foreach ($QueryVars as $var => $value) {
 	            $QueryBits[] = urlencode($var).'='.urlencode($value);
 	        }
 	        return( implode('&', $QueryBits) );

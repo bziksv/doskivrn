@@ -141,7 +141,7 @@ error_reporting(E_ALL ^ E_NOTICE);
 		} else {
 			$pattern = "[a-zа-я]+";
 		}
-		if (strlen($word) < $min_word_length || (!preg_match("/".$pattern."/i", remove_accents($word))) || ($common[$word] == 1)) {
+		if (strlen($word) < $min_word_length || (!preg_match("/".$pattern."/i", remove_accents($word))) || (isset($common[$word]) && $common[$word] == 1)) {
 			return 1;
 		} else {
 			return 0;
@@ -385,6 +385,8 @@ error_reporting(E_ALL ^ E_NOTICE);
 		$keys = array_keys($result_array);
 		$maxweight = $result_array[$keys[0]];
 
+		$start = max(1, (int) $start);
+		$per_page = max(1, (int) $per_page);
 
 		for ($i = ($start -1)*$per_page; $i <min($results, ($start -1)*$per_page + $per_page) ; $i++) {
 			$in[] = $keys[$i];
@@ -460,13 +462,15 @@ function get_search_results($query, $start, $category, $searchtype, $results, $d
            $query=str_replace('"','',$query);
         }   
 	$words = makeboollist($query);
+	if (!isset($words['ignore'])) {
+		$words['ignore'] = array();
+	}
 	$ignorewords = $words['ignore'];
 	
 	
 	$full_result['ignore_words'] = $words['ignore'];
 
-	if ($start==0) 
-		$start=1;
+	$start = max(1, (int) $start);
 	$result = search($words, $category, $start, $results_per_page, $searchtype, $domain);
 	if (!is_array($result)) {
 		$result = array('results' => 0);
@@ -496,6 +500,12 @@ function get_search_results($query, $start, $category, $searchtype, $results, $d
 		}
 	}
 
+	if (!isset($did_you_mean)) {
+		$did_you_mean = '';
+	}
+	if (!isset($did_you_mean_b)) {
+		$did_you_mean_b = '';
+	}
 	$full_result['did_you_mean'] = $did_you_mean;
 	$full_result['did_you_mean_b'] = $did_you_mean_b;
 
@@ -555,7 +565,7 @@ function get_search_results($query, $start, $category, $searchtype, $results, $d
 				$begin = 0;
 				$end = 0;
 				foreach ($places as $id => $place) {
-					while ($places[$id + $x] - $place < $desc_length && $x+$id < count($places) && $place < strlen($fulltxt) -$desc_length) {
+					while (isset($places[$id + $x]) && $places[$id + $x] - $place < $desc_length && $x+$id < count($places) && $place < strlen($fulltxt) -$desc_length) {
 						$x++;
 						$begin = $id;
 						$end = $id + $x;

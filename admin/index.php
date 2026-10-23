@@ -1,7 +1,8 @@
 <?
 header ( "Content-Type: text/html; charset=utf-8" );
+chdir ( __DIR__ );
 include '../lib.php';
-include 'controller.php';
+include __DIR__ . '/controller.php';
 $center = '';
 
 if (isset ( $_GET ["exit"] ) && $_GET ["exit"] == 'true') {

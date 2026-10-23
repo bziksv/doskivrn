@@ -21,7 +21,8 @@ if (preg_match('#^/search/?$#', $uri)) {
     return true;
 }
 
-if (preg_match('#^/admin/?$#', $uri)) {
+if (preg_match('#^/admin(?:/index\.php)?/?$#', $uri)) {
+    chdir(__DIR__ . '/../admin');
     require __DIR__ . '/../admin/index.php';
     return true;
 }

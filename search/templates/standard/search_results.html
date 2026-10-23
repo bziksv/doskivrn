@@ -67,7 +67,11 @@ extract($search_results);
 
 <!-- results listing -->
 
-	<?php foreach ($qry_results as $_key => $_row){
+	<?php
+	$domain_name = isset($domain_name) ? $domain_name : '';
+	$adv_qry = '';
+	$type_qry = '';
+	foreach ($qry_results as $_key => $_row){
 		$last_domain = $domain_name;
 		extract($_row);
 		if ($show_query_scores == 0) {

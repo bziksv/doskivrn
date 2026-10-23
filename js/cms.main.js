@@ -11,8 +11,10 @@ $(document).ready(function(){
 		return false;
 	})
 	
-	$('#cgo').click(function (){
+	$('#cgo').click(function (e){
+		e.preventDefault();
 		calculation();
+		return false;
 	})
 	
 });

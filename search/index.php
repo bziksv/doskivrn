@@ -7,9 +7,9 @@
 define('MODULE_SYS', true);
 require_once dirname(__DIR__) . '/configure.php';
 
-function __autoload($class_name) {
+spl_autoload_register(function ($class_name) {
 	require_once $_SERVER ['DOCUMENT_ROOT'] . "/classes/class." . $class_name . '.php';
-}
+});
 
 error_reporting ( E_ALL );
 $include_dir = "./include";
@@ -17,27 +17,18 @@ include ("$include_dir/commonfuncs.php");
 //extract(getHttpVars());
 
 
-if (isset ( $_GET ['query'] )) {
-	$query = $_GET ['query'];
-} else {
+$query = isset ( $_GET ['query'] ) ? $_GET ['query'] : '';
+if (! isset ( $_GET ['query'] )) {
 	$_GET ['query'] = '';
 }
-if (isset ( $_GET ['search'] ))
-	$search = $_GET ['search'];
-if (isset ( $_GET ['domain'] ))
-	$domain = $_GET ['domain'];
-if (isset ( $_GET ['type'] ))
-	$type = $_GET ['type'];
-if (isset ( $_GET ['catid'] ))
-	$catid = $_GET ['catid'];
-if (isset ( $_GET ['category'] ))
-	$category = $_GET ['category'];
-if (isset ( $_GET ['results'] ))
-	$results = $_GET ['results'];
-if (isset ( $_GET ['start'] ))
-	$start = $_GET ['start'];
-if (isset ( $_GET ['adv'] ))
-	$adv = $_GET ['adv'];
+$search = isset ( $_GET ['search'] ) ? $_GET ['search'] : '';
+$domain = isset ( $_GET ['domain'] ) ? $_GET ['domain'] : '';
+$type = isset ( $_GET ['type'] ) ? $_GET ['type'] : '';
+$catid = isset ( $_GET ['catid'] ) ? $_GET ['catid'] : '';
+$category = isset ( $_GET ['category'] ) ? $_GET ['category'] : '';
+$results = isset ( $_GET ['results'] ) ? $_GET ['results'] : '';
+$start = isset ( $_GET ['start'] ) ? $_GET ['start'] : '';
+$adv = isset ( $_GET ['adv'] ) ? $_GET ['adv'] : '';
 
 $include_dir = "./include";
 $template_dir = "./templates";
@@ -66,7 +57,7 @@ if ($results != "") {
 	$results_per_page = $results;
 }
 
-if (get_magic_quotes_gpc () == 1) {
+if (function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc() == 1) {
 	$query = stripslashes ( $query );
 }
 
@@ -151,15 +142,25 @@ $dbc->setConnectValue ( $dbhost, $dbname, $dbuser, $dbpass );
 
 
 
+if (!isset($_GET['page'])) {
+	$_GET['page'] = '';
+}
 $smarty->assign ( "content", $content );
 $smarty->assign ( "pagename", "Поиск" );
+$smarty->assign ( "title", "Поиск" );
+$smarty->assign ( "keywords", "" );
+$smarty->assign ( "description", "Поиск по сайту doskivrn.ru" );
 
-if (trim ( htmlspecialchars ( $_GET ["query"], ENT_QUOTES ) ) != $last_words [0] [0] && trim ( htmlspecialchars ( $_GET ["query"], ENT_QUOTES ) ) != '') {
-	$dbc->query ( "update search_last set word_q='" . urldecode ( htmlspecialchars ( $_GET ["query"], ENT_QUOTES ) ) . "' where num='1'" );
-	$dbc->query ( "update search_last set word_q='" . $last_words [0] [0] . "' where num='2'" );
-	$dbc->query ( "update search_last set word_q='" . $last_words [1] [0] . "' where num='3'" );
-} elseif ($last_words [0] [0] == '') {
-	$dbc->query ( "update search_last set word_q='" . urldecode ( htmlspecialchars ( $_GET ["query"], ENT_QUOTES ) ) . "' where num='1'" );
+$last_words = array (array (''), array (''), array (''));
+$lw_res = @$dbc->query ( "select word_q from search_last order by num ASC", 1 );
+if ($lw_res && mysql_num_rows ( $lw_res ) > 0) {
+	for($i = 0; $i < mysql_num_rows ( $lw_res ); $i ++) {
+		$last_words [$i] = array (mysql_result ( $lw_res, $i, "word_q" ));
+	}
+}
+$q_esc = trim ( htmlspecialchars ( isset ( $_GET ["query"] ) ? $_GET ["query"] : '', ENT_QUOTES ) );
+if ($q_esc != '' && $q_esc != $last_words [0] [0]) {
+	$dbc->query ( "update search_last set word_q='" . urldecode ( $q_esc ) . "' where num='1'" );
 	$dbc->query ( "update search_last set word_q='" . $last_words [0] [0] . "' where num='2'" );
 	$dbc->query ( "update search_last set word_q='" . $last_words [1] [0] . "' where num='3'" );
 }

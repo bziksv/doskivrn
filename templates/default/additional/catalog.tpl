@@ -73,7 +73,7 @@
 
 {foreach from=$cats item=item}
     <a class="good-cat" href="{$item.link}" class="good-cat">
-        <img class="good-cat__img" src="{$item.img}" alt="{$item.img-alt}">
+        <img class="good-cat__img" src="{$item.img}" alt="{$item.text}">
         <p class="good-cat__p">{$item.text}</p>
     </a>
 {/foreach}

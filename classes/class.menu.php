@@ -11,11 +11,13 @@ class menu {
 			$menu [$i] = array ($link, mysql_result ( $res1, $i, "name" ) );
 			$menu [$i]["class"] = mysql_result ( $res1, $i, "class" ) ;
 			$menu [$i]["bottom"] = mysql_result ( $res1, $i, "bottom" ) ;
-			if ($_GET ["module"] == 'pages') {
-				if ("/pages/{$_GET["page"]}/" == $link) {
+			$module = isset ( $_GET ["module"] ) ? $_GET ["module"] : '';
+			$page = isset ( $_GET ["page"] ) ? $_GET ["page"] : '';
+			if ($module == 'pages') {
+				if ("/pages/{$page}/" == $link) {
 					$_this = true;
 				}
-			} elseif (preg_match ( "/^\/{$_GET ["module"]}/", $link )) {
+			} elseif ($module !== '' && preg_match ( "/^\/{$module}/", $link )) {
 				$_this = true;
 			
 			}
@@ -26,8 +28,8 @@ class menu {
 				for($y = 0; $y < mysql_num_rows ( $res2 ); $y ++) {
 					$link = (mysql_result ( $res2, $y, "link" ) == '') ? "#" : mysql_result ( $res2, $y, "link" );
 					$menu [$i] ["childs"] [$y] = array ($link, mysql_result ( $res2, $y, "name" ) );
-					if ($_GET ["module"] == 'pages') {
-						if ("/pages/{$_GET["page"]}/" == $link) {
+					if ($module == 'pages') {
+						if ("/pages/{$page}/" == $link) {
 							$menu [$i] ["childs"] [$y] [] = "1";
 							$_this = true;
 						}
